@@ -100,7 +100,7 @@ public class PoliceTest {
     @Test
     public void testAjouterSoinAssure() {
         
-        SoinAssure soin = new SoinAssure("100", 0.50, 50.0);
+        SoinAssure soin = new SoinAssure("100", 0.50, 50.0, 0.0);
         police1.ajouterSoinAssure(soin);
         assertFalse(police1.getListeSoinsAssures().isEmpty());
         assertEquals(1,police1.getListeSoinsAssures().size());
@@ -113,9 +113,9 @@ public class PoliceTest {
     public void testSupprimerSoinAssure() {
         
         assertTrue(police1.getListeSoinsAssures().isEmpty());
-        SoinAssure soin = new SoinAssure("100", 0.50, 50.0);
+        SoinAssure soin = new SoinAssure("100", 0.50, 50.0,0.0);
         police1.ajouterSoinAssure(soin);
-        SoinAssure soin2 = new SoinAssure("175", 0.9, 150.0);
+        SoinAssure soin2 = new SoinAssure("175", 0.9, 150.0, 0.0);
         police1.ajouterSoinAssure(soin2);
         assertEquals(2,police1.getListeSoinsAssures().size());
         police1.supprimerSoinAssure(soin);

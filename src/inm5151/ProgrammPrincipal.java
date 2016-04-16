@@ -18,13 +18,14 @@ public class ProgrammPrincipal {
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
+     * @throws inm5151.OperationInvalideException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, OperationInvalideException {
         
-        if (args.length != 2){
+        if (args.length != 3){
             System.out.println("Le chemin du fichier manque...");
         }else { 
-            traiterDemande(args[0], args[1]);
+            traiterDemande(args[0], args[1], args[2]);
         } 
     }
 }

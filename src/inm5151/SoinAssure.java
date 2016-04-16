@@ -15,15 +15,23 @@ public class SoinAssure {
     private double pourcentage;
     private double limite;
     private String numSoin;
+    private double limiteMensuelle;
 
-    public SoinAssure(String numSoin, double pourcentage, double limite) {
+    
+    public SoinAssure(){}
+    
+    public SoinAssure(String numSoin, double pourcentage, double limite, double limiteMensuelle) {
         
         this.pourcentage = pourcentage;
         this.limite = limite;
         this.numSoin = numSoin;
+        this.limiteMensuelle = limiteMensuelle;
     }
     
-    public SoinAssure(){}
+    public  boolean admetLimiteMensuelle(){
+        
+        return limiteMensuelle != 0.0;
+    }
     
     public String getNumSoin(){
         return numSoin;
@@ -63,5 +71,19 @@ public class SoinAssure {
     public boolean validerLaLimiteDuSoin() {
 
         return (limite >= 0);
+    }
+
+    /**
+     * @return the limiteMensuelle
+     */
+    public double getLimiteMensuelle() {
+        return limiteMensuelle;
+    }
+
+    /**
+     * @param limiteMensuelle the limiteMensuelle to set
+     */
+    public void setLimiteMensuelle(double limiteMensuelle) {
+        this.limiteMensuelle = limiteMensuelle;
     }
 }

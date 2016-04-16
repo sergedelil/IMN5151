@@ -37,10 +37,10 @@ public class SoinAssureTest {
     
     @Before
     public void setUp() {
-        soin1 = new SoinAssure("100", 0.50, 50.0);
-        soin2 = new SoinAssure("175", 0.9, 80.0);
+        soin1 = new SoinAssure("100", 0.50, 50.0,0.0);
+        soin2 = new SoinAssure("175", 0.9, 80.0, 0.0);
         soin3 = new SoinAssure();
-        soin4 = new SoinAssure("800", 0.4, 60.5);
+        soin4 = new SoinAssure("800", 0.4, 60.5, 0.0);
     }
     
     @After

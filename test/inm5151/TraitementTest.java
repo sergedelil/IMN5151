@@ -64,8 +64,8 @@ public class TraitementTest {
         lesPolices.add(police1);
         lesPolices.add(police2);
 
-        soinAs1 = new SoinAssure("100", 0.50, 50.0);
-        soinAs2 = new SoinAssure("175", 0.9, 80.0);
+        soinAs1 = new SoinAssure("100", 0.50, 50.0, 0.0);
+        soinAs2 = new SoinAssure("175", 0.9, 80.0, 0.0);
 
         soinRec1 = new SoinRecu("100", "2016-04-04", "180.00$", "CXS4567");
         soinRec2 = new SoinRecu("200", "2016-03-04", "230.00$", "DSJ1249");
@@ -98,27 +98,31 @@ public class TraitementTest {
 
     /**
      * Test of rembourserPolice method, of class Traitement.
+     * @throws inm5151.OperationInvalideException
      */
     @Test
-    public void testRembourserPolice() {
+    public void testRembourserPolice() throws OperationInvalideException {
         System.out.println("rembourserPolice");
         String valeur = "";
         SoinAssure soinA = null;
-        Traitement.rembourserPolice(valeur, soinA);
+        HistRemb hist = null;
+        Traitement.rembourserPolice(valeur, soinA,hist);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
      * Test of appliquerPolice method, of class Traitement.
+     * @throws inm5151.OperationInvalideException
      */
     @Test
-    public void testAppliquerPolice() {
+    public void testAppliquerPolice() throws OperationInvalideException {
         System.out.println("appliquerPolice");
         Client client = null;
         Reclamation rec = null;
         List<Police> lesPolices = null;
-        Traitement.appliquerPolice(client, rec, lesPolices);
+        HistRemb hist = null;
+        Traitement.appliquerPolice(client, rec, lesPolices,hist);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/test/inm5151/SoinAssureTest.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/src/inm5151/Beneficiaire.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/src/inm5151/SoinAssure.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/test/inm5151/PoliceTest.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/test/inm5151/TraitementTest.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/src/inm5151/HistRemb.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/src/inm5151/Creation.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/src/inm5151/Traitement.java</file>
+            <file>file:/Users/sergedelil/NetBeansProjects/INM5151/src/inm5151/ProgrammPrincipal.java</file>
+        </group>
     </open-files>
 </project-private>

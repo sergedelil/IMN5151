@@ -79,7 +79,10 @@ public class FileReader {
             
             while(i < compteur){
                 
-                SoinAssure soin = new SoinAssure(listePolice.getJSONObject(i).getString("soin"), listePolice.getJSONObject(i).getDouble("pourcentage"),listePolice.getJSONObject(i).getDouble("limite"));
+                SoinAssure soin = new SoinAssure(listePolice.getJSONObject(i).getString("soin"), 
+                        listePolice.getJSONObject(i).getDouble("pourcentage"),
+                        listePolice.getJSONObject(i).getDouble("limite"),
+                        listePolice.getJSONObject(i).getDouble("limiteMensuelle"));
                 pol.getListeSoinsAssures().add(soin);
                 i++;
             }

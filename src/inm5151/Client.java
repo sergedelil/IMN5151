@@ -5,6 +5,7 @@
  */
 package inm5151;
 import static inm5151.Message.*;
+import java.util.*;
 
 /**
  *@author Serge Dogny
@@ -18,6 +19,7 @@ public class Client {
     private String dateNaiss;
     private String courriel;
     private String contrat;
+    private List<Beneficiaire> listeBeneficiares;
     
     public Client(String nom, String prenom, String dateNaiss, String courriel,String contrat){
     
@@ -26,8 +28,36 @@ public class Client {
         this.dateNaiss = dateNaiss;
         this.courriel = courriel;
         this.contrat = contrat;
+        this.listeBeneficiares = new ArrayList();
     }
     public Client(){}
+    
+    public boolean ajouterBeneficiaire(Beneficiaire b){
+    
+        return this.listeBeneficiares.add(b);
+    }
+    
+    public boolean supprimerBeneficiaire(Beneficiaire b){
+    
+        return this.listeBeneficiares.remove(b);
+    }
+    
+    public int nbBeneficiaire(){
+    
+        return this.listeBeneficiares.size();
+    }
+    
+    public boolean contient(Beneficiaire b){
+        
+        boolean trouve = false;
+        
+        for(int i = 0; i < this.listeBeneficiares.size() && !trouve; i++){
+            
+            if(this.listeBeneficiares.get(i).equals(b))
+                trouve = true;
+        }
+        return trouve;
+    }
     
     public String getNom(){
         return this.nom;
@@ -100,5 +130,19 @@ public class Client {
         qualifierDateNaiss(client);
         qualifierCourriel(client);
         qualifierContrat(client);
+    }
+
+    /**
+     * @return the listeBeneficiares
+     */
+    public List<Beneficiaire> getListeBeneficiares() {
+        return listeBeneficiares;
+    }
+
+    /**
+     * @param listeBeneficiares the listeBeneficiares to set
+     */
+    public void setListeBeneficiares(List<Beneficiaire> listeBeneficiares) {
+        this.listeBeneficiares = listeBeneficiares;
     }
 }

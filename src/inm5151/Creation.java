@@ -44,21 +44,53 @@ public class Creation {
         Client client = new Client(nom, prenom, dateNaiss, courriel, contrat);
         return client;
     }
+    
+    public static HistRemb chargerHistorique(JSONObject jObj) {
+        String valSoin0 = extraireChamp(jObj, "soin0");
+        existenceChamp(valSoin0, "soin0");
+        String valSoin100 = extraireChamp(jObj, "soin100");
+        existenceChamp(valSoin100, "soin100");
+        String valSoin150 = extraireChamp(jObj, "soin150");
+        existenceChamp(valSoin150, "soin150");
+        String valSoin175 = extraireChamp(jObj, "soin175");
+        existenceChamp(valSoin175, "soin175");
+        String valSoin200 = extraireChamp(jObj, "soin200");
+        existenceChamp(valSoin200, "soin200");
+        String valSoin300 = extraireChamp(jObj, "soin300");
+        existenceChamp(valSoin300, "soin300");
+        String valSoin400 = extraireChamp(jObj, "soin400");
+        existenceChamp(valSoin400, "soin400");
+        String valSoin500 = extraireChamp(jObj, "soin500");
+        existenceChamp(valSoin500, "soin500");
+        String valSoin600 = extraireChamp(jObj, "soin600");
+        existenceChamp(valSoin600, "soin600");
+        String valSoin700 = extraireChamp(jObj, "soin700");
+        existenceChamp(valSoin700, "soin700");
+        HistRemb hist = new HistRemb(valSoin0,valSoin100,valSoin150,valSoin175,valSoin200,
+                valSoin300,valSoin400,valSoin500,valSoin600,valSoin700);
+        return hist;
+    }
 
     public static void ajouterSoin(Reclamation reclam, SoinRecu soin) {
         reclam.getListe().add(soin);
     }
 
-    public static void traiterDemande(String fichierEntree, String FichierPolice) throws IOException {
+    public static void traiterDemande(String fichierEntree, String fichierPolice, String fichierHistoriq) throws IOException, OperationInvalideException {
         
         List<Police> listePolice;
         JSONObject obj = chargement(fichierEntree);
         Client client = creerReclamant(obj);
         validerClient(client);
+        
         Reclamation rec = creerReclamation(obj);
         validerReclamation(rec, client);
-        listePolice = chargerLesPolice(FichierPolice);
-        appliquerPolice(client, rec, listePolice);
+        
+        listePolice = chargerLesPolice(fichierPolice);
+        
+        JSONObject hObj = chargement(fichierHistoriq);
+        HistRemb historique = chargerHistorique(hObj);
+        
+        appliquerPolice(client, rec, listePolice,historique);
     }
 
     public static SoinRecu creerSoin(JSONObject objetSoin) {
