@@ -5,10 +5,12 @@
  */
 package inm5151;
 
+import static inm5151.Creation.ecrireHistoriqueSurDisque;
 import java.util.List;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import static inm5151.Message.*;
+import java.io.IOException;
 
 /**
  *@author Serge Dogny
@@ -113,7 +115,7 @@ public class Traitement {
     
     }
     
-    public static void appliquerPolice(Client client, Reclamation rec, List<Police> lesPolices,HistRemb historique) throws OperationInvalideException{
+    public static void appliquerPolice(Client client, Reclamation rec, List<Police> lesPolices,HistRemb historique) throws OperationInvalideException, IOException{
         
         String contrat = client.getContrat();
         List<SoinRecu> listeSoin = rec.getListe();
@@ -126,6 +128,7 @@ public class Traitement {
             int position = i+1;
             afficherRemboursement(listeSoin.get(i),remboursement,position);
         }
+        ecrireHistoriqueSurDisque(historique);
     }
     
     public static DecimalFormat formaterEnDecimal() {

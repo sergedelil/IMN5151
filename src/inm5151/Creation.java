@@ -10,6 +10,7 @@ import static inm5151.Message.*;
 import static inm5151.FileReader.*;
 import static inm5151.Reclamation.validerReclamation;
 import static inm5151.Traitement.appliquerPolice;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import net.sf.json.JSONArray;
@@ -149,5 +150,36 @@ public class Creation {
             String med = Creation.extraireChamp(objetSoin, "medecin");
             existenceChampSoin(med, "medecin", i + 1);
         }
+    }
+    public static void sauvegarderHistorique(String nomFichier, String objFichHist) throws IOException{
+        
+        try (FileWriter fichierJson = new FileWriter(nomFichier)) {
+            fichierJson.write(objFichHist);
+            fichierJson.flush();
+            fichierJson.close();
+        }
+    }
+    
+    public static String miseAJourFichierHistorique(HistRemb hist, JSONObject fichHist){
+        
+        fichHist.accumulate("soin0", hist.getSoin0());
+        fichHist.accumulate("soin100", hist.getSoin100());
+        fichHist.accumulate("soin150", hist.getSoin150());
+        fichHist.accumulate("soin175", hist.getSoin175());
+        fichHist.accumulate("soin200", hist.getSoin200());
+        fichHist.accumulate("soin300", hist.getSoin300());
+        fichHist.accumulate("soin400", hist.getSoin400());
+        fichHist.accumulate("soin500", hist.getSoin500());
+        fichHist.accumulate("soin600", hist.getSoin600());
+        fichHist.accumulate("soin700", hist.getSoin700());
+        
+        return fichHist.toString();
+    }
+    
+    public static void ecrireHistoriqueSurDisque(HistRemb hist) throws IOException{
+        
+        JSONObject hObj = new JSONObject();
+        String obj = miseAJourFichierHistorique(hist, hObj);
+        sauvegarderHistorique("resources/historique.json", obj);
     }
 }
