@@ -60,7 +60,7 @@ public class ProgrammPrincipal {
         remboursementFinales.accumulate("remboursements", listedessoin(Reclamation.getListe()));
         remboursementFinales.accumulate("total",(Traitement.getSommeTotal()+ "$"));
             
-        return remboursementFinales.toString(1);
+        return remboursementFinales.toString(3);
       }
       
        public static void ecrireRemboursementSurDisque() throws IOException{
