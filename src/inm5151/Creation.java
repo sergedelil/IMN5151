@@ -24,7 +24,8 @@ import net.sf.json.JSONSerializer;
  * @author MAKHIVCHTCHOUK  Olga
  */
 public class Creation {
-
+    
+     
     public static Client creerReclamant(JSONObject jObj) {
         String nom = extraireChamp(jObj, "nom");
         existenceChamp(nom, "nom");
@@ -45,7 +46,7 @@ public class Creation {
         Client client = new Client(nom, prenom, dateNaiss, courriel, contrat);
         return client;
     }
-    
+       
     public static HistRemb chargerHistorique(JSONObject jObj) {
         String valSoin0 = extraireChamp(jObj, "soin0");
         existenceChamp(valSoin0, "soin0");
@@ -182,4 +183,6 @@ public class Creation {
         String obj = miseAJourFichierHistorique(hist, hObj);
         sauvegarderHistorique("resources/historique.json", obj);
     }
+    
+    
 }

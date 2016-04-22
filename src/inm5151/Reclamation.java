@@ -15,9 +15,9 @@ import java.util.*;
  */
 public class Reclamation {
 
-    private String numDossier;
-    private String moisReclamation;
-    private List<SoinRecu> listeSoinsRecus;
+    private static String numDossier;
+    private static String moisReclamation;
+    private static List<SoinRecu> listeSoinsRecus;
     
     public Reclamation(String numDossier, String dateReclamation){
     
@@ -26,15 +26,15 @@ public class Reclamation {
         this.listeSoinsRecus = new ArrayList();
     }
     
-    public List<SoinRecu> getListe(){
+    public static List<SoinRecu> getListe(){
         return listeSoinsRecus;
     }
     
-    public String getNumDossier(){
+    public static String getNumDossier(){
         return numDossier;
     }
     
-    public String getMoisReclamation(){
+    public static String getMoisReclamation(){
         return moisReclamation;
     }
     
