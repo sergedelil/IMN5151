@@ -20,11 +20,14 @@ import java.io.IOException;
 public class Traitement {
     
     private static Monnaie remboursement ;
-    
+    private static double sommeTotal;
     public Traitement(){
         remboursement = null;
     }
-    
+    public static double getSommeTotal(){
+            return sommeTotal;
+    }
+       
     public static SoinAssure ExtrairePoliceSoin(Client client, List<Police> lesPolices, SoinRecu unSoin){
         
         SoinAssure soinPolice = null;
@@ -118,7 +121,7 @@ public class Traitement {
     public static void appliquerPolice(Client client, Reclamation rec, List<Police> lesPolices,HistRemb historique) throws OperationInvalideException, IOException{
         
         String contrat = client.getContrat();
-        List<SoinRecu> listeSoin = rec.getListe();
+        List<SoinRecu> listeSoin = Reclamation.getListe();
         
         for(int i = 0; i < listeSoin.size(); i++ ){
             
@@ -126,7 +129,11 @@ public class Traitement {
             SoinAssure soinA = ExtrairePoliceSoin(client,lesPolices,soinR);
             rembourserPolice(soinR.getMontant(), soinA, historique);
             int position = i+1;
+            
             afficherRemboursement(listeSoin.get(i),remboursement,position);
+            String remb = remboursement.toString();
+           double somme=  Double.parseDouble(remb.substring(0, remb.length() - 1));
+            sommeTotal= sommeTotal+somme;
         }
         ecrireHistoriqueSurDisque(historique);
     }

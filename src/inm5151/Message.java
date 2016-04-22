@@ -8,6 +8,7 @@ package inm5151;
 import java.io.FileWriter;
 import java.io.IOException;
 import static java.lang.System.exit;
+import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 /**
@@ -143,35 +144,10 @@ public class Message {
     }
     
     public static void afficherRemboursement(SoinRecu soin, Monnaie remboursement,int position) throws IOException{
-                
-       ecrireRemboursementSurDisque();
         System.out.println(" Soin "+position+" : ");
         System.out.println(soin);
         System.out.println(" Remboursement : "+remboursement);
         System.out.println("======================================================================");
     }
-    public static void ecrireRemboursement(String nomFichier, String resultat) throws IOException {
-
-      try (FileWriter fichierJson = new FileWriter(nomFichier)) {
-            fichierJson.write(resultat);
-            fichierJson.flush();
-            fichierJson.close();
-        }
-    }
     
-      public static String createJSONArrayRembouresement()throws IOException {
-        JSONObject remboursementFinales= new JSONObject();
-        String somme = null ;
-        remboursementFinales.accumulate("dossier",Reclamation.getNumDossier());
-        remboursementFinales.accumulate("mois", Reclamation.getMoisReclamation());
-        remboursementFinales.accumulate("remboursements", null);
-        remboursementFinales.accumulate("total", somme);
-            
-        return remboursementFinales.toString(1);
-      }
-      
-       public static void ecrireRemboursementSurDisque() throws IOException{
-        String obj = createJSONArrayRembouresement();
-        ecrireRemboursement("resources/output.json", obj);
-    }
 }
