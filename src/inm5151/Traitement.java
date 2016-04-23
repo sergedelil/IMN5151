@@ -10,7 +10,10 @@ import java.util.List;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import static inm5151.Message.*;
+import java.io.FileWriter;
 import java.io.IOException;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  *@author Serge Dogny
@@ -21,6 +24,8 @@ public class Traitement {
     
     private static Monnaie remboursement ;
     private static double sommeTotal;
+    private static final JSONArray soinResultat= new JSONArray();
+    
     public Traitement(){
         remboursement = null;
     }
@@ -124,20 +129,48 @@ public class Traitement {
         List<SoinRecu> listeSoin = Reclamation.getListe();
         
         for(int i = 0; i < listeSoin.size(); i++ ){
-            
+            JSONObject soin =new JSONObject();
             SoinRecu soinR = listeSoin.get(i);
             SoinAssure soinA = ExtrairePoliceSoin(client,lesPolices,soinR);
             rembourserPolice(soinR.getMontant(), soinA, historique);
             int position = i+1;
             
             afficherRemboursement(listeSoin.get(i),remboursement,position);
+            soin.accumulate("soin",listeSoin.get(i).getNumSoin() );
+            soin.accumulate("date",listeSoin.get(i).getDatesoin());
+            soin.accumulate("montant",remboursement.toString());
+            soinResultat.add(soin);
             String remb = remboursement.toString();
            double somme=  Double.parseDouble(remb.substring(0, remb.length() - 1));
             sommeTotal= sommeTotal+somme;
         }
+        
+        ecrireRemboursementSurDisque();
         ecrireHistoriqueSurDisque(historique);
     }
+       public static void ecrireRemboursement(String nomFichier, String resultat) throws IOException {
+
+      try (FileWriter fichierJson = new FileWriter(nomFichier)) {
+            fichierJson.write(resultat);
+            fichierJson.flush();
+            fichierJson.close();
+        }
+    }
     
+      public static String createJSONArrayRembouresement()throws IOException {
+        JSONObject remboursementFinales= new JSONObject();
+        remboursementFinales.accumulate("dossier",Reclamation.getNumDossier());
+        remboursementFinales.accumulate("mois", Reclamation.getMoisReclamation());
+        remboursementFinales.accumulate("remboursements", soinResultat);
+        remboursementFinales.accumulate("total",(Traitement.getSommeTotal()+ "$"));
+            
+        return remboursementFinales.toString(3);
+      }
+      
+       public static void ecrireRemboursementSurDisque() throws IOException{
+        String obj = createJSONArrayRembouresement();
+        ecrireRemboursement("resources/output.json", obj);
+    }
     public static DecimalFormat formaterEnDecimal() {
         
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
