@@ -21,8 +21,8 @@ public class MonnaieTest {
 
     Monnaie m1;
     Monnaie m2;
+    
     Monnaie m3;
-    Monnaie m4;
 
     public MonnaieTest() {
     }
@@ -40,7 +40,7 @@ public class MonnaieTest {
 
         m1 = new Monnaie(25, 43);
         m2 = new Monnaie(17, 35);
-        m4 = new Monnaie(234, 56);
+        m3 = new Monnaie(234, 56);
     }
 
     @After
@@ -48,7 +48,7 @@ public class MonnaieTest {
 
         m1 = null;
         m2 = null;
-        m4 = null;
+        m3 = null;
     }
 
     /**
@@ -57,8 +57,8 @@ public class MonnaieTest {
     @Test
     public void testToString() {
 
-        assertEquals("234.56$", m4.toString());
-        assertFalse("2.56$".equals(m4));
+        assertEquals("234.56$", m3.toString());
+        assertFalse("2.56$".equals(m3));
         assertNotNull(m1.toString());
     }
 
@@ -69,8 +69,8 @@ public class MonnaieTest {
     public void testGetDollars() {
 
         assertEquals(25, m1.getDollars());
-        assertEquals(234, m4.getDollars());
-        assertFalse(2 == m4.getDollars());
+        assertEquals(234, m3.getDollars());
+        assertFalse(2 == m3.getDollars());
 
     }
 
@@ -79,9 +79,9 @@ public class MonnaieTest {
      */
     @Test
     public void testGetCents() {
-        assertEquals(56, m4.getCents());
-        assertEquals(56, m4.getCents());
-        assertFalse(2 == m4.getCents());
+        assertEquals(56, m3.getCents());
+        assertEquals(56, m3.getCents());
+        assertFalse(2 == m3.getCents());
     }
 
     /**
@@ -90,7 +90,7 @@ public class MonnaieTest {
     @Test
     public void testGetTotalCents() {
 
-        assertEquals(23456, m4.getTotalCents());
+        assertEquals(23456, m3.getTotalCents());
         assertEquals(2543, m1.getTotalCents());
         assertEquals(1735, m2.getTotalCents());
     }
@@ -124,9 +124,9 @@ public class MonnaieTest {
     @Test
     public void testPourcentage() {
 
-        m4.pourcentage(50);
-        assertEquals(11728, m4.getTotalCents());
-        assertFalse(10 == m4.getTotalCents());
+        m3.pourcentage(50);
+        assertEquals(11728, m3.getTotalCents());
+        assertFalse(10 == m3.getTotalCents());
     }
 
     /**
