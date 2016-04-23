@@ -13,42 +13,42 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *@author Serge Dogny
+ * @author Serge Dogny
  * @author ALLAMOU Fatima-Ezzahra
- * @author MAKHIVCHTCHOUK  Olga
+ * @author MAKHIVCHTCHOUK Olga
  */
 public class MonnaieTest {
-    
-    Monnaie m1 ;
-    Monnaie m2 ;
+
+    Monnaie m1;
+    Monnaie m2;
     Monnaie m3;
-    Monnaie instance;
-    
+    Monnaie m4;
+
     public MonnaieTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        
+
         m1 = new Monnaie(25, 43);
         m2 = new Monnaie(17, 35);
-        instance = new Monnaie(234,56);
+        m4 = new Monnaie(234, 56);
     }
-    
+
     @After
     public void tearDown() {
-        
+
         m1 = null;
         m2 = null;
-        instance = null;
+        m4 = null;
     }
 
     /**
@@ -56,8 +56,9 @@ public class MonnaieTest {
      */
     @Test
     public void testToString() {
-        
-        assertEquals("234.56$", instance.toString());
+
+        assertEquals("234.56$", m4.toString());
+        assertFalse("2.56$".equals(m4));
         assertNotNull(m1.toString());
     }
 
@@ -66,9 +67,11 @@ public class MonnaieTest {
      */
     @Test
     public void testGetDollars() {
-        
-        assertEquals(234, instance.getDollars());
+
         assertEquals(25, m1.getDollars());
+        assertEquals(234, m4.getDollars());
+        assertFalse(2 == m4.getDollars());
+
     }
 
     /**
@@ -76,7 +79,9 @@ public class MonnaieTest {
      */
     @Test
     public void testGetCents() {
-        assertEquals(56, instance.getCents());
+        assertEquals(56, m4.getCents());
+        assertEquals(56, m4.getCents());
+        assertFalse(2 == m4.getCents());
     }
 
     /**
@@ -84,8 +89,8 @@ public class MonnaieTest {
      */
     @Test
     public void testGetTotalCents() {
-        
-        assertEquals(23456, instance.getTotalCents());
+
+        assertEquals(23456, m4.getTotalCents());
         assertEquals(2543, m1.getTotalCents());
         assertEquals(1735, m2.getTotalCents());
     }
@@ -97,17 +102,20 @@ public class MonnaieTest {
     public void testAdditionner() {
         m1.additionner(m2);
         assertEquals(4278, m1.getTotalCents());
+        assertFalse(10 == m1.getTotalCents());
     }
 
     /**
      * Test of soustraire method, of class Monnaie.
+     *
      * @throws java.lang.Exception
      */
     @Test
     public void testSoustraire() throws Exception {
-        
+
         m1.soustraire(m2);
         assertEquals(808, m1.getTotalCents());
+        assertFalse(10 == m1.getTotalCents());
     }
 
     /**
@@ -115,9 +123,10 @@ public class MonnaieTest {
      */
     @Test
     public void testPourcentage() {
-        
-        instance.pourcentage(50);
-        assertEquals(11728, instance.getTotalCents());
+
+        m4.pourcentage(50);
+        assertEquals(11728, m4.getTotalCents());
+        assertFalse(10 == m4.getTotalCents());
     }
 
     /**
@@ -125,9 +134,10 @@ public class MonnaieTest {
      */
     @Test
     public void testMultiplier() {
-        
+
         m2.multiplier(m1);
-        assertEquals(4412105, m2.getTotalCents() );
+        assertEquals(4412105, m2.getTotalCents());
+        assertFalse(10 == m1.getTotalCents());
     }
-    
+
 }
