@@ -22,6 +22,7 @@ public class Monnaie {
            totalCents = dollars * 100 + cents;
        }
     }
+    public Monnaie(){}
    
     @Override
     public String toString(){

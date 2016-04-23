@@ -10,6 +10,7 @@ import static inm5151.Message.*;
 import static inm5151.FileReader.*;
 import static inm5151.Reclamation.validerReclamation;
 import static inm5151.Traitement.appliquerPolice;
+import static inm5151.Traitement.creerMonnaie;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -191,21 +192,46 @@ public class Creation {
             fichierJson.flush();
             fichierJson.close();
         }
-        
-        
-        
     }
     
-    public static String creationFichierSortie(Reclamation rec,List<String> listeRemboursement){
+    public static String creationFichierSortie(Reclamation rec,List<String> listRemb){
         
         JSONObject obj = new JSONObject();
         obj.accumulate("dossier", rec.getNumDossier());
         obj.accumulate("mois", rec.getMoisReclamation());
-        //JSONArray tab = new JSONArray();
-        obj.accumulate("remboursements", rec.getListe());
-        return obj.toString();
+        JSONArray tab = new JSONArray();
+        JSONObject objTab = new JSONObject();
         
-    
+        for(int i = 0; i < listRemb.size(); i++){
+            
+            construireSoin(objTab, rec, i, listRemb, tab);
+        }
+        
+        obj.accumulate("remboursements", tab);
+        Monnaie total = sommeRemboursement(listRemb);
+        obj.accumulate("total", total.toString());
+        
+        return obj.toString();
+    }
+
+    private static void construireSoin(JSONObject objTab, Reclamation rec, int i, List<String> listRemb, JSONArray tab) {
+        objTab.accumulate("soin", rec.getListe().get(i).getNumSoin());
+        objTab.accumulate("date", rec.getListe().get(i).getDatesoin());
+        objTab.accumulate("montant", listRemb.get(i));
+        
+        tab.add(i, objTab);
+        objTab.discard("soin");
+        objTab.discard("date");
+        objTab.discard("montant");
+    }
+
+    private static Monnaie sommeRemboursement(List<String> listRemb) {
+        Monnaie total = new Monnaie();
+        for(int i = 0; i< listRemb.size(); i++){
+            
+            total.additionner(creerMonnaie(listRemb.get(i).substring(0, listRemb.get(i).length() - 1)));
+        }
+        return total;
     }
 
 }
