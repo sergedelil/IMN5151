@@ -122,7 +122,7 @@ public class TraitementTest {
         Reclamation rec = null;
         List<Police> lesPolices = null;
         HistRemb hist = null;
-        Traitement.appliquerPolice(client, rec, lesPolices,hist);
+       // Traitement.appliquerPolice(client, rec, lesPolices,hist);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
