@@ -5,6 +5,8 @@
  */
 package inm5151;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -60,6 +62,7 @@ public class PoliceTest {
         assertEquals("A",police1.getContrat());
         assertNull(police2.getContrat());
         assertEquals("B", police3.getContrat());
+        assertFalse("C".equals(police1.getContrat()));
     }
 
     /**
@@ -70,6 +73,7 @@ public class PoliceTest {
         
         assertEquals(0,police1.getListeSoinsAssures().size());
         assertNotNull(police1.getListeSoinsAssures());
+        
     }
 
     /**
@@ -79,7 +83,13 @@ public class PoliceTest {
     public void testSetContrat() {
         
         police2.setContrat("E");
-        assertEquals("E", police2.getContrat());
+        assertEquals("E", police2.getContrat()); 
+        
+        police2.setContrat("F");
+        assertEquals("F", police2.getContrat());
+        
+        assertFalse("G".equals(police2.getContrat()));
+        
     }
 
     /**
