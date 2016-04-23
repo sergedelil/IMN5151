@@ -167,5 +167,45 @@ public class TraitementTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of appliquerLimiteMensuelle method, of class Traitement.
+     */
+    @Test
+    public void testAppliquerLimiteMensuelle() throws Exception {
+        System.out.println("appliquerLimiteMensuelle");
+        SoinAssure soinA = null;
+        HistRemb hist = null;
+        Traitement.appliquerLimiteMensuelle(soinA, hist);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of appliquerCouverture method, of class Traitement.
+     */
+    @Test
+    public void testAppliquerCouverture() {
+        System.out.println("appliquerCouverture");
+        SoinAssure soinA = null;
+        double montantSoin = 0.0;
+        Traitement.appliquerCouverture(soinA, montantSoin);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of creerMonnaie method, of class Traitement.
+     */
+    @Test
+    public void testCreerMonnaie() {
+        System.out.println("creerMonnaie");
+        String montant = "";
+        Monnaie expResult = null;
+        Monnaie result = Traitement.creerMonnaie(montant);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }
