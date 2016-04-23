@@ -7,10 +7,6 @@ package inm5151;
 
 import java.io.IOException;
 import static inm5151.Creation.*;
-import java.io.FileWriter;
-import java.util.List;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 /**
  *@author Serge Dogny
@@ -30,9 +26,7 @@ public class ProgrammPrincipal {
             System.out.println("Le chemin du fichier manque...");
         }else { 
             traiterDemande(args[0], args[1], args[2]);
-            
         } 
     }
- 
 }
        

@@ -12,10 +12,10 @@ package inm5151;
  */
 public class SoinRecu {
     
-    private  String dateSoin;
-    private  String montant;
-    private  String idMedecin;
-    private  String numSoin;
+    private String dateSoin;
+    private String montant;
+    private String idMedecin;
+    private String numSoin;
 
     public SoinRecu(String numSoin, String dateSoin, String montant, String idMedecin) {
         
