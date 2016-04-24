@@ -5,8 +5,6 @@
  */
 package inm5151;
 
-import static inm5151.Traitement.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -23,18 +21,13 @@ import static org.junit.Assert.*;
  */
 public class TraitementTest {
 
-    Client client1;
-    Client client2;
-    Police police1;
-    Police police2;
-    Police police3;
+  Client client1;
     SoinAssure soinAs1;
     SoinAssure soinAs2;
-    SoinRecu soinRec1;
-    SoinRecu soinRec2;
-
+    Police police1;
     List<Police> lesPolices;
-
+    SoinRecu soinRec1;
+    HistRemb hist;
     Reclamation recl1;
 
     public TraitementTest() {
@@ -52,40 +45,30 @@ public class TraitementTest {
 
     @Before
     public void setUp() {
-        client1 = new Client("Kent", "Clark", "1960-12-23", "clarkkent@gmail.com", "A");
-        client2 = new Client("Paul", "Dubois", "1980-10-01", "pauldubois@gmail.com", "D");
-
+         client1 = new Client("Kent", "Clark", "1960-12-23", "clarkkent@gmail.com", "A");
+        soinAs1 = new SoinAssure("100", 0.50, 50.0, 250.0);
+        soinAs2 = new SoinAssure("175", 0.9, 80.0, 200.0);
+        recl1 = new Reclamation("A19601223", "2016-01");
         police1 = new Police("A");
-        police2 = new Police("B");
-        police3 = new Police("D");
-
-        lesPolices = new ArrayList();
-
-        lesPolices.add(police1);
-        lesPolices.add(police2);
-
-        soinAs1 = new SoinAssure("100", 0.50, 50.0, 0.0);
-        soinAs2 = new SoinAssure("175", 0.9, 80.0, 0.0);
-
-        soinRec1 = new SoinRecu("100", "2016-04-04", "180.00$", "CXS4567");
-        soinRec2 = new SoinRecu("200", "2016-03-04", "230.00$", "DSJ1249");
-
         police1.ajouterSoinAssure(soinAs1);
         police1.ajouterSoinAssure(soinAs2);
-
-        recl1 = new Reclamation("A19601223", "2016-01");
-    }
+        lesPolices = new ArrayList();
+        lesPolices.add(police1);
+        soinRec1 = new SoinRecu("100", "2016-04-04", "180.00$", "CXS4567");
+        hist = new HistRemb("soin0", "soin100", "soin150", "soin175", "soin200", "soin300", "soin400", "soin500", "soin600", "soin700");
+}
 
     @After
     public void tearDown() {
         client1 = null;
-        client2 = null;
+        soinAs1 = null;
+        soinAs2 = null;
         police1 = null;
-        police2 = null;
-        police3 = null;
-        lesPolices = null;
         recl1 = null;
-    }
+        lesPolices = null;
+        soinRec1 = null;
+        hist = null;
+     }
 
     /**
      * Test of ExtrairePoliceSoin method, of class Traitement.
@@ -93,105 +76,23 @@ public class TraitementTest {
     @Test
     public void testExtrairePoliceSoin() {
         
-        assertEquals(soinAs1,ExtrairePoliceSoin(client1, lesPolices, soinRec1));
+        SoinAssure result = Traitement.ExtrairePoliceSoin(client1, lesPolices, soinRec1);
+        assertFalse(soinAs2.equals(result));
     }
-
-    /**
-     * Test of rembourserPolice method, of class Traitement.
-     * @throws inm5151.OperationInvalideException
-     */
-    @Test
-    public void testRembourserPolice() throws OperationInvalideException {
-        System.out.println("rembourserPolice");
-        String valeur = "";
-        SoinAssure soinA = null;
-        HistRemb hist = null;
-        Traitement.rembourserPolice(valeur, soinA,hist);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of appliquerPolice method, of class Traitement.
-     * @throws inm5151.OperationInvalideException
-     */
-    @Test
-    public void testAppliquerPolice() throws OperationInvalideException {
-        System.out.println("appliquerPolice");
-        Client client = null;
-        Reclamation rec = null;
-        List<Police> lesPolices = null;
-        HistRemb hist = null;
-       // Traitement.appliquerPolice(client, rec, lesPolices,hist);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of formaterEnDecimal method, of class Traitement.
-     */
-    @Test
-    public void testFormaterEnDecimal() {
-        System.out.println("formaterEnDecimal");
-        DecimalFormat expResult = null;
-        DecimalFormat result = Traitement.formaterEnDecimal();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of obtenirPartieEntiere method, of class Traitement.
-     */
-    @Test
-    public void testObtenirPartieEntiere() {
-        System.out.println("obtenirPartieEntiere");
-        String montant = "";
-        String expResult = "";
-        String result = Traitement.obtenirPartieEntiere(montant);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of obtenirPartieDecimale method, of class Traitement.
-     */
-    @Test
-    public void testObtenirPartieDecimale() {
-        System.out.println("obtenirPartieDecimale");
-        String montant = "";
-        String expResult = "";
-        String result = Traitement.obtenirPartieDecimale(montant);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of appliquerLimiteMensuelle method, of class Traitement.
-     */
-    @Test
-    public void testAppliquerLimiteMensuelle() throws Exception {
-        System.out.println("appliquerLimiteMensuelle");
-        SoinAssure soinA = null;
-        HistRemb hist = null;
-        Traitement.appliquerLimiteMensuelle(soinA, hist);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
+        /**
      * Test of appliquerCouverture method, of class Traitement.
      */
     @Test
     public void testAppliquerCouverture() {
-        System.out.println("appliquerCouverture");
-        SoinAssure soinA = null;
-        double montantSoin = 0.0;
+
+        SoinAssure soinA = soinAs1;
+        double montantSoin = 100.0;
         Traitement.appliquerCouverture(soinA, montantSoin);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        soinA = soinAs2;
+        montantSoin = 300.0;
+        Traitement.appliquerCouverture(soinA, montantSoin);
+
     }
 
     /**
@@ -199,13 +100,12 @@ public class TraitementTest {
      */
     @Test
     public void testCreerMonnaie() {
-        System.out.println("creerMonnaie");
-        String montant = "";
-        Monnaie expResult = null;
+
+        String montant = "234.76";
+        Monnaie expResult = new Monnaie(234, 76);
         Monnaie result = Traitement.creerMonnaie(montant);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println(result);
+        assertTrue(expResult.toString().equals(result.toString()));
     }
-    
+
 }
